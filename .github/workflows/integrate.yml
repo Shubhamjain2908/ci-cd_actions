@@ -1,17 +1,19 @@
 name: Node Continuous Integration
 
+# Events using 'ON'
 on:
   pull_request:
     branches: [ master ]
 
+# Every workflow have one or more jobs
 jobs:
   test_pull_request:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
+    runs-on: ubuntu-latest  # VM
+    steps:  
+      - uses: actions/checkout@v2 # Src code into VM
       - uses: actions/setup-node@v1
         with:
           node-version: 12
-      - run: npm ci
+      - run: npm ci # does a clean install for CI server
       - run: npm test
       - run: npm run build
